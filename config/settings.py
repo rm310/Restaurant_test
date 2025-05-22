@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     #local
     'crispy_forms',
     'restaurant',
-    'bootstrap5',
+    # 'bootstrap5',
     'rest_framework'
 ]
 
