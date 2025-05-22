@@ -1,0 +1,60 @@
+{% extends 'restaurant/Base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Information</title>
+</head>
+<body>
+    <form method="POST" action="{% url 'contactinfo' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+    <h2>CONTACT INFORMATION</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Phone Number 1</th>
+                <th>Phone Number 2</th>
+                <th>Email</th>
+                <th>Social Account 1</th>
+                <th>Social Account 2</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contacts in contacts %}
+            <tr>
+                <td>{{ contacts.phone_number1}}</td>
+                <td>{{ contacts.phone_number2 }}</td>
+                <td>{{ contacts.email }}</td>
+                <td>{{ contacts.social_account1 }}</td>
+                <td>{{ contacts.social_account2 }}</td>
+                <td>
+                    <form method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="contact_id" value="{{ contact.id }}">
+                        <button type="submit" name="edit">Edit</button>
+                    </form>
+                    <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this contact?');">
+                        {% csrf_token %}
+                        <input type="hidden" name="contact_id" value="{{ contact.id }}">
+                        <button type="submit" name="delete">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No contacts to connect yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="button" onclick="window.history.back()">Back</button>
+</body>
+</html>
+
+{% endblock %}

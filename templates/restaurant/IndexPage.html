@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Welcome to the Restaurant{% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+
+<div class="container">
+    <ul class="nav bg-info">
+    </ul>
+
+    {% block content %}
+        <h1 class="mt-4">Welcome to the Restaurant!</h1>
+        <p class="lead">Choose an option below:</p>
+        <div class="list-group">
+            <a href="{% url 'menu' %}" class="list-group-item list-group-item-action">Menu</a>
+            <a href="{% url 'contactinfo' %}" class="list-group-item list-group-item-action">Contact Information</a>
+            <a href="{% url 'booking' %}" class="list-group-item list-group-item-action">Booking Place</a>
+            <a href="{% url 'orders' %}" class="list-group-item list-group-item-action">Dishes Delivery</a>
+        </div>
+    {% endblock %}
+</div>
+
+</body>
+</html>
